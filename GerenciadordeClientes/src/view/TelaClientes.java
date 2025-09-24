@@ -1,49 +1,73 @@
 package view;
+
 import javax.swing.table.DefaultTableModel;
+import dao.ClienteDAO;
+import model.Cliente;
 
 public class TelaClientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientes.class.getName());
-    
-    public TelaClientes() {
-        initComponents();
-            txtNome.setText("");
-            txtEmail.setText("");
-            txtTelefone.setText("");
-            carregarTabela();
-        setLocationRelativeTo(null);
+
+   public void carregarTabela() {
+    // Pega o modelo da tabela que foi definido na interface gráfica
+    DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+    // Limpa a tabela para evitar duplicidade de dados ao recarregar
+    modelo.setNumRows(0);
+ 
+    ClienteDAO clienteDAO = new ClienteDAO();
+ 
+        // Pega a lista de clientes do banco de dados
+        for (Cliente c : clienteDAO.listar()) {
+            // Adiciona uma nova linha na tabela para cada cliente da lista
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getEmail(),
+                c.getTelefone()
+            });
+        }
     }
+   
+    public TelaClientes() {
+        initComponents(); 
+        setLocationRelativeTo(null);
+
+        
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        txtNome = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
+        Label1 = new javax.swing.JLabel();
+        Label2 = new javax.swing.JLabel();
+        Label3 = new javax.swing.JLabel();
+        Label4 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbClientes = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtPesquisa = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtPesquisa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("ID:");
+        Label1.setText("ID");
 
-        jLabel2.setText("Nome:");
+        Label2.setText("Nome");
 
-        jLabel3.setText("Email:");
+        Label3.setText("Email");
 
-        jLabel4.setText("Telefone:");
+        Label4.setText("Telefone");
 
-        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
+        txtId.setEditable(false);
+
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,12 +78,25 @@ public class TelaClientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbClientesMouseClicked(evt);
+                tblClientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbClientes);
+        jScrollPane1.setViewportView(tblClientes);
+
+        jLabel1.setText("Pesquisar:");
+
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyPressed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
 
@@ -71,154 +108,209 @@ public class TelaClientes extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
-
-        jLabel5.setText("Pesquisar:");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalvar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnExcluir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Label4)
+                            .addComponent(Label3)
+                            .addComponent(Label2)
+                            .addComponent(Label1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(txtEmail)
+                            .addComponent(txtNome)
+                            .addComponent(txtId)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExcluir)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label1)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label2)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label3)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label4)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
+
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-               // 1. Coletar os dados da tela
-String nome = txtNome.getText();
-String email = txtEmail.getText();
-String telefone = txtTelefone.getText();
+        // 1. Coletar os dados da tela
+        String nome = txtNome.getText();
+        String email = txtEmail.getText();
+        String telefone = txtTelefone.getText();
 
-// 2. Criar um objeto Cliente com os dados
-Cliente cliente = new Cliente();
-cliente.setNome(nome);
-cliente.setEmail(email);
-cliente.setTelefone(telefone);
+        // 2. Criar um objeto Cliente com os dados
+        Cliente cliente = new Cliente();
+        cliente.setNome(nome);
+        cliente.setEmail(email);
+        cliente.setTelefone(telefone);
 
-// 3. Criar um objeto ClienteDAO para salvar o cliente
-ClienteDAO clienteDAO = new ClienteDAO();
-clienteDAO.salvar(cliente);
-
-// 4. Limpar os campos após salvar
-txtNome.setText("");
-txtEmail.setText("");
-txtTelefone.setText("");
-        public TelaClientes() {
-    initComponents();
-    setLocationRelativeTo(null);
-    carregarTabela(); // << ADICIONE ESTA LINHA
-}
+        ClienteDAO clienteDAO = new ClienteDAO();
+        
+        cliente.setNome(txtNome.getText());
+        cliente.setEmail(txtEmail.getText());
+        cliente.setTelefone(txtTelefone.getText());
+        
+        // Se o campo ID não estiver vazio, significa que é uma atualização
+        if (!txtId.getText().isEmpty()) {
+        cliente.setId(Integer.parseInt(txtId.getText()));
+        clienteDAO.atualizar(cliente);
+        } else {
+        // Caso contrário, é uma inserção
+        clienteDAO.salvar(cliente);
+        }
+        
+        // Limpa os campos e recarrega a tabela
+        txtId.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtTelefone.setText("");
+    
+        carregarTabela();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
-        int linhaSelecionada = tbClientes.getSelectedRow();
-        txtld.setText(tbClientes.getValueAt(linhaSelecionada, 0).toString());
-        txtNome.set.setText(tbClientes.getValueAt(linhaSelecionada, 1).toString());
-        txtEmail.setText(tbClientes.getValueAt(linhaSelecionada, 2).toString());
-        txtTelefone.setText(tbClientes.getValueAt(linhaSelecionada, 3).toString())
-    }//GEN-LAST:event_tbClientesMouseClicked
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        // Pega o índice da linha que foi selecionada na tabela
+    int linhaSelecionada = tblClientes.getSelectedRow();
+    
+    // Preenche os campos de texto com os valores da linha selecionada
+    // .getValueAt(linha, coluna) pega o valor de uma célula específica
+    // .toString() converte o valor para texto
+    txtId.setText(tblClientes.getValueAt(linhaSelecionada, 0).toString());
+    txtNome.setText(tblClientes.getValueAt(linhaSelecionada, 1).toString());
+    txtEmail.setText(tblClientes.getValueAt(linhaSelecionada, 2).toString());
+    txtTelefone.setText(tblClientes.getValueAt(linhaSelecionada, 3).toString());
+    }//GEN-LAST:event_tblClientesMouseClicked
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int id = Integer.parseInt(txtId.getText());
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.excluir(id);
+        
+        // Limpa os campos e recarrega a tabela
+        txtId.setText("");
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtTelefone.setText("");
+        
+        carregarTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyPressed
+        // Pega o texto digitado no campo de pesquisa
+        String nome = txtPesquisa.getText();
+        
+        // Pega o modelo da tabela
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        // Limpa a tabela
+        modelo.setNumRows(0);
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        
+        // Busca no banco de dados os clientes com o nome digitado
+        for (Cliente c : clienteDAO.buscarPorNome(nome)) {
+            // Adiciona os resultados da busca na tabela
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getEmail(),
+                c.getTelefone()
+            });
+        }
+    }//GEN-LAST:event_txtPesquisaKeyPressed
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaClientes().setVisible(true));
     }
-    public void carregarTabela() {
-    // Pega o modelo da tabela que foi definido na interface gráfica
-    DefaultTableModel modelo = (DefaultTableModel) tbClientes.getModel();
-    // Limpa a tabela para evitar duplicidade de dados ao recarregar
-    modelo.setNumRows(0);
- 
-    ClienteDAO clienteDAO = new ClienteDAO();
- 
-    // Pega a lista de clientes do banco de dados
-    for (Cliente c : clienteDAO.listar()) {
-        // Adiciona uma nova linha na tabela para cada cliente da lista
-        modelo.addRow(new Object[]{
-            c.getId(),
-            c.getNome(),
-            c.getEmail(),
-            c.getTelefone()
-        });
-    }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label1;
+    private javax.swing.JLabel Label2;
+    private javax.swing.JLabel Label3;
+    private javax.swing.JLabel Label4;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbClientes;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;

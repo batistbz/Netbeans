@@ -6,7 +6,7 @@ package view;
 
 /**
  *
- * @author biaba
+ * @author Davi
  */
 public class TelaMenu extends javax.swing.JFrame {
     
@@ -29,20 +29,16 @@ public class TelaMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jMenuItem1 = new javax.swing.JMenuItem();
         btnGerenciarClientes = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        menuSair = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenu();
 
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setText("jLabel2");
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu Principal - Gerenciador de Clientes");
 
         btnGerenciarClientes.setText("Gerenciar Clientes");
         btnGerenciarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -55,16 +51,15 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Opções");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
+        jMenuBar1.add(jMenu2);
 
         menuSair.setText("Sair");
-        jMenu2.add(menuSair);
-
-        jMenuBar1.add(jMenu2);
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -73,32 +68,29 @@ public class TelaMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+                .addGap(133, 133, 133)
                 .addComponent(btnGerenciarClientes)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
+                .addContainerGap(118, Short.MAX_VALUE)
                 .addComponent(btnGerenciarClientes)
-                .addGap(121, 121, 121))
+                .addGap(137, 137, 137))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerenciarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarClientesActionPerformed
-         // Cria uma instância (um objeto) da tela de clientes
-            TelaClientes telaDeClientes = new TelaClientes();
-        // Torna a tela de clientes visível
-            telaDeClientes.setVisible(true);
+        TelaClientes telaDeClientes = new TelaClientes();
+        telaDeClientes.setVisible(true);
     }//GEN-LAST:event_btnGerenciarClientesActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // Encerra a aplicação
-            System.exit(0);
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,11 +119,10 @@ public class TelaMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerenciarClientes;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem menuSair;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables
 }
