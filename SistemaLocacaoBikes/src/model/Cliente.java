@@ -1,3 +1,6 @@
+
+package model;
+
 public class Cliente {
     private int id;
     private String nome;
@@ -15,4 +18,7 @@ public class Cliente {
     public void setTelefone (String telefone) {this.telefone = telefone; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+}
+
+    
 }
