@@ -4,6 +4,10 @@
  */
 package dao;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+
 public class TelaClientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientes.class.getName());
@@ -27,7 +31,7 @@ public class TelaClientes extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +73,7 @@ public class TelaClientes extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -80,7 +84,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 "Nome", "Email", "CPF", "Telefone"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +115,7 @@ public class TelaClientes extends javax.swing.JFrame {
                         .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnListar)
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                        .addContainerGap(54, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,14 +150,7 @@ public class TelaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        public void listarClientes (){
-            List<Cliente> lista = new ClienteDAO().read();
-            DefaultTableModel modelo = (DefaultTableModel) tabelaClientes.getModel();
-            modelo.setRowCount(0);
-                for (Cliente c : lista) {
-                    modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getCpf(), c.getTelefone(), c.getEmail()});
-                }
-            }
+        listarClientes();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -172,6 +169,14 @@ public class TelaClientes extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new TelaClientes().setVisible(true));
     }
 
+    public void listarClientes (){
+            List<Cliente> lista = new ClienteDAO().read();
+            DefaultTableModel modelo = (DefaultTableModel) tabelaClientes.getModel();
+            modelo.setRowCount(0);
+                for (Cliente c : lista) {
+                    modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getCpf(), c.getTelefone(), c.getEmail()});
+                }
+            }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
@@ -179,7 +184,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaClientes;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
