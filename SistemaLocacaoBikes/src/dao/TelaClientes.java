@@ -52,6 +52,11 @@ public class TelaClientes extends javax.swing.JFrame {
         btnNovo.setText("Novo");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
 
@@ -141,7 +146,27 @@ public class TelaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        public void listarClientes (){
+            List<Cliente> lista = new ClienteDAO().read();
+            DefaultTableModel modelo = (DefaultTableModel) tabelaClientes.getModel();
+            modelo.setRowCount(0);
+                for (Cliente c : lista) {
+                    modelo.addRow(new Object[]{c.getId(), c.getNome(), c.getCpf(), c.getTelefone(), c.getEmail()});
+                }
+            }
     }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Cliente c = new Cliente ();
+        c.setNome(txtNome.getText());
+        c.setCpf(txtCpf.getText());
+        c.setTelefone(txtTelefone.getText());
+        c.setEmail(txtEmail.getText());
+        
+        ClienteDAO dao = new ClienteDAO();
+        dao.create(c);
+        listarClientes();
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new TelaClientes().setVisible(true));
