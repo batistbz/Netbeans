@@ -52,6 +52,11 @@ public class TelaBicicletas extends javax.swing.JFrame {
         btnNovo.setText("Novo");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
 
@@ -120,9 +125,17 @@ public class TelaBicicletas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Bicicleta b = new Bicicleta();
+        b.setCodigo(txtCodigo.getText());
+        b.setStatus(cbStatus.getSelectedItem().toString());
+        
+        BicicletaDAO dao = new BicicletaDAO();
+        dao.create(b);
+        listarBicicletas();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
