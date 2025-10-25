@@ -4,7 +4,10 @@
  */
 package view;
 
+import dao.BicicletaDAO;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import model.Bicicleta;
 
 /**
  *
@@ -13,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaBicicletas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaBicicletas.class.getName());
+    private int selectedId;
 
     /**
      * Creates new form TelaBicicletas
