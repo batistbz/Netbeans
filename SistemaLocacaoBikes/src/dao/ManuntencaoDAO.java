@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Manutencao;
 
-public class ManutencaoDAO {
+public class ManuntencaoDAO {
     public void create(Manutencao m) {
         try (Connection con = ConnectionFactory.getConnection()) {
             String sql = "INSERT INTO manutencao(bicicleta_id, descricao, data) VALUES (?, ?, ?)";
