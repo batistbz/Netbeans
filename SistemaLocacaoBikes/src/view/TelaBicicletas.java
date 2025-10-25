@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author biaba
@@ -30,6 +32,13 @@ public class TelaBicicletas extends javax.swing.JFrame {
 
         txtCodigo = new javax.swing.JTextField();
         cbStatus = new javax.swing.JComboBox<>();
+        btnNovo = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaBicicletas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,6 +51,49 @@ public class TelaBicicletas extends javax.swing.JFrame {
             }
         });
 
+        btnNovo.setText("Novo");
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+
+        tabelaBicicletas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaBicicletas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -50,8 +102,19 @@ public class TelaBicicletas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListar)))
+                .addContainerGap(287, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -60,7 +123,16 @@ public class TelaBicicletas extends javax.swing.JFrame {
                 .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovo)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnListar))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         pack();
@@ -70,9 +142,65 @@ public class TelaBicicletas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbStatusActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+          Bicicleta b = new Bicicleta();
+            b.setCodigo(txtCodigo.getText());
+            b.setStatus(cbStatus.getSelectedItem().toString());
+            BicicletaDAO dao = new BicicletaDAO();
+            dao.create(b);
+            listarBicicletas();
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        listarBicicletas();
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        update();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        delete();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    public void listarBicicletas() {
+        List<Bicicleta> lista = new BicicletaDAO().read();
+        DefaultTableModel modelo = (DefaultTableModel)
+        tabelaBicicletas.getModel();
+        modelo.setRowCount(0);
+        
+        for (Bicicleta b : lista) {
+            modelo.addRow(new Object[]{b.getId(), b.getCodigo(), b.getStatus()});
+        }
+    }
+    
+        public void update() {
+        if (this.selectedId == -1) {
+            return;
+        }
+        
+        Bicicleta bike = new Bicicleta();
+        bike.setId(this.selectedId);
+        bike.setCodigo(txtCodigo.getText());
+        bike.setStatus(cbStatus.getSelectedItem().toString());
+        
+        BicicletaDAO bikeDAO = new BicicletaDAO();
+        
+        bikeDAO.update(bike);
+        listarBicicletas();
+        this.selectedId = -1;
+    }
+        
+      public void delete() {
+        if (this.selectedId == -1) {
+            return;
+        }
+        Bicicleta bike = new Bicicleta();
+        bike.setId(this.selectedId);
+        BicicletaDAO bikeDAO = new BicicletaDAO();
+        bikeDAO.delete(bike);
+        listarBicicletas();
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -96,7 +224,14 @@ public class TelaBicicletas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnListar;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbStatus;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaBicicletas;
     private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }
