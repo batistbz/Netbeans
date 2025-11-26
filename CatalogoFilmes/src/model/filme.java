@@ -1,6 +1,6 @@
 package model;
 
-public class Movie {
+public class filme {
 
     private Integer id;               // Integer para permitir null quando não salvo ainda
     private String titulo;
@@ -8,9 +8,9 @@ public class Movie {
     private Integer anoLancamento;    // Integer para permitir ausência
     private String genero;
 
-    public Movie() {}
+    public filme() {}
 
-    public Movie(String titulo, String diretor, Integer anoLancamento, String genero) {
+    public filme(String titulo, String diretor, Integer anoLancamento, String genero) {
         this.titulo = titulo;
         this.diretor = diretor;
         this.anoLancamento = anoLancamento;
